@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 限制传入属性的类型 -->
+    <div id="app"></div>
+    <div id="app1"></div>
+    <div id="app2"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 创建组件
+        class Person extends React.Component {
+
+            // 用static 直接赋值propTypes和 defaultProps
+            // 把它们直接添加成为类Person的属性方法
+            // 注意是类Person的属性 而不是 类的实例化对象 的 原型对象 上
+
+            // 1. 对标签属性进行类型、必要性的限制
+			static propTypes = {
+				name:PropTypes.string.isRequired, //限制name必传，且为字符串
+				sex:PropTypes.string,//限制sex为字符串
+				age:PropTypes.number,//限制age为数值
+			}
+
+			// 2. 指定默认标签属性值
+			static defaultProps = {
+				sex:'男',//sex默认值为男
+				age:18 //age默认值为18
+			}
+            render() {
+                const {name,sex,age} = this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age+1}</li>
+                    </ul>
+                )
+            }
+        }
+
+        ReactDOM.render(<Person name='hery'/>, document.getElementById('app2'))
+        ReactDOM.render(<Person name='jack' sex='男' age={19} />, document.getElementById('app1'))
+
+        // 批量传递props 
+        const p = {name:'老刘',age:18,sex:'女'}
+        ReactDOM.render(<Person {...p}/>,document.getElementById('app'))
+
+    </script>
+</body>
+</html>

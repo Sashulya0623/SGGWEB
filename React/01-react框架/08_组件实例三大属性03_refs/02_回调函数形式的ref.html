@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回调函数形式的ref</title>
+</head>
+<body>
+    <!-- 先准备一个容器 -->
+    <div id="app"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <!-- 
+        1. ref值的类型为函数，且是箭头函数
+            ref={(currentNode) => this.input1 = currentNode}
+            把当前节点currentNode赋值给Demo实例，保存在Demo实例的input1属性上
+            这里的this指的是Demo实例对象
+     -->
+
+    <script type="text/babel">
+      // 创建一个组件
+      class Demo extends React.Component {
+        // 定义方法
+        showData = () => {
+          console.log(this)
+          alert(this.input1.value)
+        }
+
+        showData2 = () => {
+            // 解构写法
+            const {input2} = this
+            alert(input2.value)
+        }
+
+
+        render() {
+          return (
+            <div>
+              <input ref={(currentNode) => this.input1 = currentNode} type="text" placeholder="点击按钮提示数据"/>
+              <button onClick={this.showData}>点我提示左侧数据</button>
+              <input ref={(currentNode) => this.input2 = currentNode} onBlur={this.showData2} type="text" placeholder="失去焦点提示右侧数据"/>
+            </div>
+          )
+        }
+      }
+
+      // 渲染组件
+      ReactDOM.render(<Demo />, document.getElementById("app"))
+    </script>
+</body>
+</html>

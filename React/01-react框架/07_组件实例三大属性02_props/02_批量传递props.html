@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 创建组件
+        class Person extends React.Component {
+            render() {
+                // console.log(this);
+                // 解构传进来的属性及其值
+                const {name,sex,age} = this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age+1}</li>
+                    </ul>
+                )
+            }
+        }
+        // 批量传递props 
+        const p = {name:'老刘',age:18,sex:'女'}
+        // console.log("p可以通过展开符号展开吗",...p); // 展开运算符不能展开对象
+        // ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>,document.getElementById('app'))
+        // 上面语句的语法糖
+        ReactDOM.render(<Person {...p}/>,document.getElementById('app'))
+        // <Person {...p}/>中的  {...p}并不是复制对象的花括号  而是react语法中的 {表达式}
+        // react+ babel使得扩展运算符在这里可以扩展对象 ...p
+        // 但是原生js中扩展运算符不能扩展对象
+        // 而且即使react+ babel使得扩展运算符可以扩展对象，也不能随意使用
+        // 只能使用在标签属性的传递中，别的地方都不行
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react操作dom库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel库： 将jsx转换为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //  创建一个类式组件
+        class Weather extends React.Component {
+            // 1. 因为自定义数据 所以要用constructor构造器
+            // constructor中的this指向的是Weather实例
+            // 构造器调用几次？ ———— 1次
+            constructor (props) {
+                // 1.1 先继承react中的属性
+                super(props) // 不继承会报错
+                // 1.2 初始化state数据
+                this.state = {
+                    isHot: true,
+                    wind: '微风'
+                }
+                // 3.1 解决changeWeather中this的指向问题
+                //通过原型对象上的changeWeather在Weather实例上创建changeWeather函数，并指定this的指向
+                // 第一个changeWeather是Weather实例的  第二个是原型对象上的
+                this.changeWeather = this.changeWeather.bind(this)
+
+            }
+
+            // render调用几次？ ———— 1+n次 1是初始化的那次 n是状态更新的次数
+            render () { // 2. render中的this指向的也是Weather实例
+                // 点击 调用回调函数  --- 属于直接调用
+                // 2.1 先获取天气状态
+                const {isHot,wind} = this.state
+                // react把onclick写成驼峰写法 onClick
+                return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热':'凉爽'},{wind}</h2>   
+            }
+
+
+            // changeWeather调用几次？ ———— 点击几次调几次
+            // 3. changeWeather放在哪里？ ———— Weather的原型对象上，供实例使用
+			// 由于changeWeather是作为onClick的回调，所以不是通过实例调用的，属于直接调用
+			// 类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+            changeWeather() {
+                // 获取原来的isHot的值
+                const isHot = this.state.isHot
+                // 点击标题 isHot取反
+                //严重注意：状态(state)不可直接更改
+                //严重注意：状态必须通过setState进行更新,且更新是一种合并，不是替换
+                this.setState({isHot: !isHot})
+            }
+
+        }
+
+
+        //  渲染组件到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

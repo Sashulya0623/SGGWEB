@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 创建组件
+        class LiveDemo extends React.Component {
+            state = {
+                // 透明度
+                opacity: 1
+            }
+
+            // 组件挂载完毕
+            componentDidMount() {
+                // 组件一挂载完毕就启动定时器
+                this.Timer = setInterval(() => {
+                    // 先获取原来的透明度
+                    let {opacity} = this.state
+                    // 让透明度2s内缓缓消失不见 即透明度1 --- 0  分成10 每200ms减0.1透明度
+                    opacity -= 0.1
+                    if(opacity <= 0) {
+                        opacity = 1
+                    }
+                    // 设置新的透明度
+                    this.setState({opacity: opacity})
+                }, 200)
+            }
+           
+            // 组件即将卸载，组件卸载前
+            componentWillUnmount() {
+                // 清除定时器
+                clearInterval(this.Timer)
+            }
+
+            removeCmp = () => {
+                    // 卸载组件
+                    ReactDOM.unmountComponentAtNode(document.getElementById('app'))
+                }
+
+            // 初始化渲染、状态更新之后
+            render() {
+                return (
+                    <div>
+                        <h2 style={{opacity: this.state.opacity}}>React学不会怎么办了啦</h2>
+                        <button onClick={this.removeCmp}>阿西巴</button>
+                    </div>
+                )
+            }
+        }
+
+        // 渲染组件
+        ReactDOM.render(<LiveDemo />, document.getElementById('app'))
+    </script>
+</body>
+</html>

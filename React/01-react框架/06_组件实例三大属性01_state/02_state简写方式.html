@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react操作dom库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel库： 将jsx转换为js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 
+        具体简写内容：
+            1. 类可以采用直接赋值的方法初始化state
+            2. 自定义的方法采用赋值语句+箭头函数
+            这样就解决了this指向问题
+            因为直接赋值Weather实例就有了相对应的属性和方法
+     -->
+
+    <script type="text/babel">
+        //  创建一个类式组件
+        class Weather extends React.Component {
+            // 初始化state  直接赋值
+            state = {
+                isHot: true,
+                wind: '微风'
+            }
+         
+            render () {
+                const {isHot,wind} = this.state
+                return <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热':'凉爽'},{wind}</h2>   
+            }
+
+            // 自定义方法————要用赋值语句的形式+箭头函数
+            // 一定要用箭头函数 因为箭头函数可以用this
+            changeWeather = ()=>  {
+                const isHot = this.state.isHot
+                this.setState({isHot: !isHot})
+            }
+
+        }
+
+        //  渲染组件到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'))
+    </script>
+</body>
+</html>

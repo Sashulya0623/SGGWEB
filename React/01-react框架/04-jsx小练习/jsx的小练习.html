@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 先创建一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入react操作DOM的扩展库 -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入babel -->
+    <script src="../js/babel.min.js"></script>
+    <!-- 
+        jsx要放置可以产生值的表达式
+        一定注意区分：【js语句(代码)】与【js表达式】
+			1.表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方
+						下面这些都是表达式：
+								(1). a
+								(2). a+b
+								(3). demo(1)
+								(4). arr.map() 
+								(5). function test () {}
+			2.语句(代码)：
+						下面这些都是语句(代码)：
+								(1).if(){}
+								(2).for(){}
+								(3).switch(){case:xxxx}
+			备注：react可以自动遍历数组，但是不可以遍历对象
+     -->
+
+    <script type="text/babel">
+      // 模拟数据
+      const data = ["Angular", "React", "Vue"];
+
+      // 创建虚拟DOM
+      const VDOM = (
+        <div>
+          <h2>前端JS框架列表</h2>
+          <ul>
+            {data.map((item, index) => {
+              return <li key={index}>{item}</li>;
+            })}
+          </ul>
+        </div>
+      );
+
+      // 渲染虚拟DOM
+      ReactDOM.render(VDOM, document.getElementById("test"));
+    </script>
+  </body>
+</html>

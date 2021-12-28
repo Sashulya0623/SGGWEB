@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <div id="app1"></div>
+
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 创建组件
+        class Person extends React.Component {
+            render() {
+                // console.log(this);
+                // 解构传进来的属性及其值
+                const {name,sex,age} = this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age+1}</li>
+                    </ul>
+                )
+            }
+        }
+
+
+        // 渲染组件
+        // ReactDOM.render(<Person/>, document.getElementsByClassName('app'))
+        // 上面报错  只能用id属性 不能用class
+        ReactDOM.render(<Person name='hery' sex='男' age={18} />, document.getElementById('app'))
+        // age='19' 字符串型   age+1 会拼接而不是相加
+        ReactDOM.render(<Person name='jack' sex='男' age='19' />, document.getElementById('app1'))
+
+    </script>
+</body>
+</html>

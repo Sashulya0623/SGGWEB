@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  
+        要求：渲染以下结构到容器中
+            <h1 id='title'>
+                <span>Hello, React</span>
+            </h1>
+     -->
+</head>
+<body>
+   <!-- 先准备好一个“容器” 用于让react渲染-->
+   <div id="test"></div>
+
+   <!-- 一定要先引入react.development.js，后引入react-dom.development.js
+        初级开发阶段使用
+   -->
+   <!-- 引入react核心库 -->
+   <script src="../js/react.development.js"></script>
+   <!-- 引入 react-dom，用于支持react操作dom-->
+   <script src="../js/react-dom.development.js"></script>
+   <!-- 引入babel，用于将jsx转为js -->
+   <script src="../js/babel.min.js"></script>
+
+   <!-- 下面一定要将javascript改为babel，含义是：让babel翻译script标签中的代码。 -->
+   <script type="text/babel">
+       // 1. 使用jsx创建虚拟DOM
+       // const VDOM = <h1 id="title"><span>Hello, React</span></h1>; 
+       const VDOM = ( // jsx语法结构更清晰
+           <h1 id='title'>
+            <span>Hello, React</span>
+           </h1>
+       )
+       // 2. 使用react语法将VDOM转为真实DOM，插入页面
+       ReactDOM.render(VDOM, document.getElementById('test'));
+   </script> 
+</body>
+</html>

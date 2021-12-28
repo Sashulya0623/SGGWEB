@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 先准备一个容器 -->
+    <div id="app"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 创建组件  受控组件
+        class FormData extends React.Component {
+            // 1. 先初始化state
+            state = {
+                username: '',
+                password: ''
+            }
+
+            // 保存用户名到状态中
+            saveUsername = (event) => {
+                this.setState({username: event.target.value})
+            }
+
+            // 保存密码到状态中
+            savePassword = (event) => {
+                this.setState({password: event.target.value})
+            }
+            
+            // 提交收集数据
+            handleData = (event) => {
+                // 阻止表单提交  一提交就刷新 控制台就不会有输出语句
+                event.preventDefault()
+                // console.log(this)
+                const {username,password} = this.state
+                alert(`用户名是：${username}, 密码是${password}`)
+            }
+
+            render () {
+                return (
+                   <form onSubmit={this.handleData}>
+                       用户名：<input onChange={this.saveUsername} type="text" name="username" />
+                       密码：<input onChange={this.savePassword} type="password" name="password" />
+                       <button>登录</button>
+                   </form>
+                )
+            }
+        }
+         
+        // 渲染组件
+        ReactDOM.render(<FormData />, document.getElementById('app'))
+
+     </script>
+</body>
+</html>

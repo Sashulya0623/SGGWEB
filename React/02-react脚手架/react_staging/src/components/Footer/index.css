@@ -1,0 +1,33 @@
+.footer [type=checkbox] {
+    -webkit-appearance : none;
+    cursor: pointer;
+    position: relative;
+    width: 13px;
+    height: 13px;
+    font-size: 12px;
+    box-sizing: border-box;
+    margin: 3px 8px 3px 4px;
+    padding: initial;
+    border: initial;
+    background-color: #DDDDDD;
+}
+
+/* 选中后修改  */
+.footer input[type=checkbox]::after{
+    position: absolute;
+    top: 0;
+    /* 修改默认对勾颜色 */
+    color: #4C4C4C;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    visibility: visible;
+    text-align: center;
+    content: ' ';
+}
+
+.footer input[type=checkbox]:checked::after{
+    content: "√";
+    font-size: 12px;
+    font-weight: bold;
+}

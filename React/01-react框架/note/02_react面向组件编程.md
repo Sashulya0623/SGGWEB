@@ -250,7 +250,7 @@ saveFormData = (dataType,event)=>{	this.setState({[dataType]:event.target.value}
 	密码：<input onChange={event => this.saveFormData('password',event) } type="password"  name="password"/>
 	<button>登录</button>
 </form>
-```
+``` 
 #### 9. 组件的生命周期
 * 9.0 引出生命周期
   需求:定义组件实现以下功能：

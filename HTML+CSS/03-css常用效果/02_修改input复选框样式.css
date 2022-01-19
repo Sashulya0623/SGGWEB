@@ -1,0 +1,32 @@
+/* 默认 */
+input[type=checkbox]{
+            cursor: pointer;
+            position: relative;
+            width: 16px;
+            height: 16px;
+            font-size: 14px;
+            margin-right: 8px;
+          }
+ 
+/* 选中后修改  */
+input[type=checkbox]::after{
+              position: absolute;
+              top: 0;
+               /* 修改默认背景色 */
+              background-color: #fff;
+              border:1px solid #aaaaaa; 
+               /* 修改默认对勾颜色 */
+              color: #28b28b;
+              width: 1rgb(214, 201, 201);
+              height: 16px;
+              display: inline-block;
+              visibility: visible;
+              text-align: center;
+              content: ' ';
+ }
+        
+input[type=checkbox]:checked::after{
+              content: "√";
+              font-size: 12px;
+               /* font-weight: bold; */
+          }

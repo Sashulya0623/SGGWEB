@@ -1,0 +1,5 @@
+/* outline属性 */
+input {
+     /* 改变聚焦时框的颜色 */
+    outline-color: tomato;
+}

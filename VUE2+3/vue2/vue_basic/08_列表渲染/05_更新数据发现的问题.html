@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新数据问题</title>
+</head>
+<body>
+    <!-- 
+        splice() 方法向/从数组添加/删除项目，并返回删除的项目。
+
+        注释：splice() 方法会改变原始数组
+        array.splice(index, howmany, item1, ....., itemX)
+        
+        参数	描述
+        index	必需。整数，指定在什么位置添加/删除项目，使用负值指定从数组末尾开始的位置。
+        howmany	可选。要删除的项目数。如果设置为 0，则不会删除任何项目。
+        item1, ..., itemX	可选。要添加到数组中的新项目。
+     -->
+    <div id='root'>
+        <h2>人员列表</h2>
+        <button @click="updateSan">更新张三的信息</button>
+        <ul>
+            <li v-for="(item,index) of person" :key="item.id">
+                {{item.name}}-{{item.age}}-{{item.sex}}
+            </li>
+        </ul>
+    </div>
+
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                person: [
+                    {id:'001',name:'张三',age:18,sex:'男'},
+					{id:'002',name:'张玉',age:25,sex:'女'},
+					{id:'003',name:'何玉',age:34,sex:'女'},
+					{id:'004',name:'何备',age:52,sex:'男'}
+                ]
+             },
+             methods: {
+                 updateSan() {
+                    // 通过索引值修改信息(页面同时更新)
+                    // this.person[0].name = '张老师',
+                    // this.person[0].age = 58,
+                    // this.person[0].sex = '女'
+
+                    // 整个地址更改数据(无作用：vue未监测到数据变化)
+                    // 实际上数据已更改，但vue没监测到
+                    // this.person[0] = {id:'001',name:'张老师',age:58,sex:'女'}
+
+                    this.person.splice(0,1,{id:'001',name:'张老师',age:58,sex:'女'})
+
+                 }
+             },
+             computed: {}
+        })
+    </script>
+</body>
+</html>

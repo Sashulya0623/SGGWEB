@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        vue使用流程：
+            a. 创建vue实例
+            b. 挂载vue实例对象:root容器里的代码被称为【Vue模板】
+            c. 在Vue模板中使用vue模板语法 {{}}
+            d. Vue实例和容器是一一对应的
+            e. 真实开发中只有一个Vue实例，并且会配合着组件一起使用
+            f. {{xxx}}中的xxx要写js表达式，且xxx可以自动读取到data中的所有属性
+            g. 一旦data中的数据发生改变，那么页面中用到该数据的地方也会自动更新
+
+        注意区分：js表达式 和 js代码(语句)
+			1.表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方：
+						(1). a
+						(2). a+b
+						(3). demo(1)
+						(4). x === y ? 'a' : '
+			2.js代码(语句)
+						(1). if(){}
+						(2). for(){}
+
+        1. 第一次打开vue页面
+            a：有个报错，因为默认请求页面图标没找到，在根目录下添加同名图标即可
+            b：开发版本警告: 设置Vue.config.productionTip = false
+
+        2. Vue.config 是一个对象，包含 Vue 的全局配置，可以在启动应用之前修改对应 property
+            productionTip：默认值true，设置为 false以阻止 vue 在启动时生成生产版本提示
+
+     -->
+     <div id="root">
+         <!-- 在实例对象中使用vue模板语法 -->
+         <h2>hello,{{year}}</h2>
+         <h2>hello,{{name}}</h2>
+     </div>
+
+     <script>
+        //  忽略开发版本的提示
+        Vue.config.productionTip = false
+
+        // 1. 创建vue实例
+        const app = new Vue({
+            // el挂载vue实例对象root，值通常为css选择器字符串，也可document选择元素(不常用)
+            el: '#root',
+            // 存储动态数据，暂时写为对象
+            data: {
+                year: 2022,
+                name: 'taylor'
+            }
+        })
+     </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_侦听属性</title>
+</head>
+<body>
+    <!-- 
+        侦听器watch：
+			1 当被监视的属性变化时, 回调函数handler自动调用, 进行相关操作
+			2 监视的属性必须存在，才能进行监视！！
+			3 监视的两种写法：
+					(1)实例对象内：new Vue时传入watch配置
+					(2)实例对象外：通过vm.$watch监视
+     -->
+    <div id='root'>
+        <h2>今天的天气很{{weather}}</h2>
+        <button @click="changeWeather">点我切换天气</button>
+    </div>
+
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                isHot: false
+             },
+             methods: {
+                 changeWeather() {
+                     this.isHot = !this.isHot
+                 }
+             },
+             computed: {
+                 weather() {
+                     return this.isHot ? '炎热' : '凉爽'
+                 }
+             },
+
+            //  侦听属性：第一种使用
+            // watch: {
+            //     // 被侦听的是data中存在的数据，值为一个对象
+            //     isHot: {
+            //         // 确认是否以当前的初始值执行handler的函数
+            //         immediate: true,
+            //         // 初始化时，监听到数据变化时应该执行的函数
+            //         // oldValue变化前的值, newValue变化后的值
+            //         handler(oldValue, newValue) { // handler什么时候调用？当isHot发生改变时
+            //             console.log("isHot的值变了", oldValue, newValue);
+            //         }
+            //     }
+            // }
+
+        })
+
+        // 第二种使用
+        vm.$watch('isHot', {
+                immediate: true,
+                // 初始化时，监听到数据变化时应该执行的函数
+                // oldValue变化前的值, newValue变化后的值
+                handler(oldValue, newValue) { // handler什么时候调用？当isHot发生改变时
+                    console.log("isHot的值变了", oldValue, newValue);
+                }
+            })
+    </script>
+</body>
+</html>

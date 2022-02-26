@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性简写</title>
+</head>
+<body>
+    <!-- 
+        计算属性如果只读取值，则不用set
+     -->
+    <div id='root'>
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+		名：<input type="text" v-model="lastName"> <br/><br/>
+        计算属性实现 全名：<span>{{fullName1}}</span>
+    </div>
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                firstName: '张',
+                lastName: '三'
+             },
+             computed: {
+                 fullName1() {
+                    // console.log(this) //此处的this是vm
+                    return this.firstName + '-' + this.lastName
+                 }
+             }
+        })
+    </script>
+</body>
+</html>

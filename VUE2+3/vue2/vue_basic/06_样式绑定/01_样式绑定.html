@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 500px;
+            height: 100px;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+        }
+        .tomato {
+            background-color: tomato;
+            color: white;
+        }
+        .blue {
+            background-color: blue;
+            color: yellow;
+        }
+        .purple {
+            background-color: purple;
+            color: white;
+        }
+
+        .taylor {
+            border-radius: 5px;
+        }
+
+        .taylor1 {
+            font-size: 36px;
+            background-color: rebeccapurple;
+        }
+
+        .taylor2 {
+            border-radius: 5px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- 
+        绑定样式：
+			1. class样式
+				写法:class="xxx" xxx可以是字符串、对象、数组
+						字符串写法适用于：类名不确定，要动态获取
+						数组写法适用于：要绑定多个样式，个数不确定，名字也不确定
+						对象写法适用于：要绑定多个样式，个数确定，名字也确定，但不确定用不用
+			2. style样式
+				:style="{fontSize: xxx}"其中xxx是动态值
+				:style="[a,b]"其中a、b是样式对象
+
+            3. Math.floor() 返回小于或等于一个给定数字的最大整数
+     -->
+
+     <div id='root'>
+         <!-- class样式 -->
+         <!-- 1. 字符串写法 : 类名及个数已知,要动态获取-->
+        <div class="box1" :class="mood" @click="changeColor">{{year}}</div>
+
+        <!-- 2. 数组写法 : 类名及个数未知,统统都用上-->
+        <div class="box1" :class="classArr">{{year}}</div>
+
+        <!-- 3. 对象写法：类名及个数已知,要动态决定用不用 -->
+        <div class="box1" :class="classObj">{{year}}</div>
+
+        <!-- style样式 -->
+        <!-- 1. 对象用法：内部的样式用驼峰法 -->
+        <div class="box1" :style="styleObj">{{year}}</div>
+
+        <!-- 2. 数组用法：数组包含样式对象 -->
+        <div class="box1" :style="styleArr">{{year}}</div>
+     </div>
+
+     <script src='../js/vue.js'></script>
+
+     <script>
+
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                year: 2022,
+                mood: 'tomato',
+                classArr: ["taylor","taylor1","taylor2"],
+                classObj: {
+                    taylor: true,
+                    taylor1: false
+                },
+                styleObj: {
+                    fontSize: '50px',
+                    color: 'orange'
+                },
+                styleArr: [
+                    {
+                        fontSize: '30px',
+                        backgroundColor: '#bfa'
+                    },
+                    {
+                        border: '1px solid tomato'
+                    }
+                ]
+             },
+             methods: {
+                 changeColor() {
+                    const arr = ['blue','tomato','purple']
+                    const index = Math.floor(Math.random()*3)
+                    this.mood = arr[index]
+                 }
+             },
+             computed: {},
+             watch: {}
+        })
+     </script>
+</body>
+</html>

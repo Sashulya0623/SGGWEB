@@ -1,33 +1,26 @@
-.footer [type=checkbox] {
-    -webkit-appearance : none;
-    cursor: pointer;
-    position: relative;
-    width: 13px;
-    height: 13px;
-    font-size: 12px;
-    box-sizing: border-box;
-    margin: 3px 8px 3px 4px;
-    padding: initial;
-    border: initial;
-    background-color: #DDDDDD;
+/*footer*/
+/* footer没有设置宽 */
+.todo-footer {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 6px;
+    margin-top: 5px;
 }
-
-/* 选中后修改  */
-.footer input[type=checkbox]::after{
-    position: absolute;
-    top: 0;
-    /* 修改默认对勾颜色 */
-    color: #4C4C4C;
-    width: 13px;
-    height: 13px;
+  
+.todo-footer label {
     display: inline-block;
-    visibility: visible;
-    text-align: center;
-    content: ' ';
+    margin-right: 20px;
+    cursor: pointer;
 }
-
-.footer input[type=checkbox]:checked::after{
-    content: "√";
-    font-size: 12px;
-    font-weight: bold;
+  
+.todo-footer label input {
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+  
+.todo-footer button {
+    float: right;
+    margin-top: 5px;
 }

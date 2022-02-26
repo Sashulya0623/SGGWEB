@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03_列表过滤</title>
+</head>
+<body>
+    <!-- 
+        需求：输入关键词，搜索符合关键词的列表项，列表一开始要完整显示在页面上
+            用watch和computed分别实现
+            computed更适合
+
+            indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置,若不存在返回-1，对大小写敏感
+
+            filter() 方法创建数组，其中填充了所有通过测试的数组元素（作为函数提供）
+
+            注释：filter() 不会对没有值的数组元素执行该函数
+
+            注释：filter() 不会改变原始数组
+     -->
+
+     <div id='root'>
+        <h2>人员列表</h2>
+        <!-- 记得输入框要双向绑定 -->
+        <input type="text" placeholder="请输入关键词" v-model="keyword">
+        <ul>
+            <li v-for="(item,index) of filPerson" :key="item.id">
+                {{item.name}}-{{item.age}}-{{item.sex}}
+            </li>
+        </ul>
+     </div>
+     <script src='../js/vue.js'></script>
+
+     <script>
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                person: [
+                    {id:'001',name:'张三',age:18,sex:'男'},
+					{id:'002',name:'张玉',age:25,sex:'女'},
+					{id:'003',name:'何玉',age:34,sex:'女'},
+					{id:'004',name:'何备',age:52,sex:'男'}
+                ],
+                keyword: '',
+                // 过滤过
+                // filPerson: []
+             },
+             methods: {},
+             computed: {
+                 filPerson() {
+                    return this.person.filter((item)=> {
+                        return item.name.indexOf(this.keyword) !== -1
+                    })
+                 }
+             },
+            //  watch: {
+            //     //  监听keyword的变化
+            //     keyword: {
+            //         immediate: true,// 确保页面已加载就能显示完整未过滤的列表
+            //         handler(value) { // 就tm离谱，居然handler写错了
+            //             // 只传一个参数则是当前keyword
+            //             this.filPerson = this.person.filter((item)=> {
+            //                 return item.name.indexOf(value) !== -1
+            //             })
+            //         }
+            //     }
+            //  }
+        })
+     </script>
+</body>
+</html>

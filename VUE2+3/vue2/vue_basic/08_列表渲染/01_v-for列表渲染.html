@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_v-for列表渲染</title>
+</head>
+<body>
+    <!-- 
+        v-for指令:
+			1. 用于展示列表数据
+			2. 语法：v-for="(item, index) of/in xxx" :key="yyy"
+			3. 可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少）
+            4. 尽可能在使用 v-for 时提供 key，它是 Vue 识别节点的一个通用机制，不建议使用index，这里随便写一下
+     -->
+     <div id='root'>
+        <!-- 1. 遍历数组 -->
+        <ul>
+            <li v-for="(item,index) of bookArr" :key="index">书名:{{item}}-序号:{{index}}</li>
+        </ul>
+
+        <!-- 2. 遍历对象 -->
+        <ul>
+            <li v-for="(value,property) of goodObj" :key="property">属性名:{{property}}-属性值:{{value}}</li>
+        </ul>
+
+        <!-- 3. 遍历字符串 -->
+        <ul>
+            <li v-for="(ch,index) of str" :key="index">字母:{{ch}}-序号:{{index}}</li>
+        </ul>
+
+        <!-- 4. 遍历指定数字次数 -->
+        <!-- 指定数字5，遍历5次，number从1起 -->
+        <ul>
+            <li v-for="(number,index) of 5" :key="index">数字:{{number}}-序号:{{index}}</li>
+        </ul>
+     </div>
+
+     <script src='../js/vue.js'></script>
+
+     <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                bookArr: ['哈利波特','时间光轮','飞鸟与鱼','河间岁月'],
+                goodObj: {
+                    id: 128,
+                    goodName: 'akdff',
+                    brand: 'takimasi',
+                    address: 'China'
+                },
+                str: 'happy'
+             },
+             methods: {},
+             computed: {}
+        })
+     </script>
+</body>
+</html>

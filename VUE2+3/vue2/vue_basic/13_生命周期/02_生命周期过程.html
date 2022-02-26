@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期过程</title>
+</head>
+<body>
+    <div id='root'>
+        <template></template>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+    Vue.config.productionTip = false
+    const vm = new Vue({
+         el:'#root',
+         template:`
+			<div>
+                <h2 v-text="n"></h2>
+				<h2>当前的n值是：{{n}}</h2>
+				<button @click="add">点我n+1</button>
+                <button @click="bye">点我销毁vm</button>
+			</div>
+		`,
+         data: {
+             n: 1
+         },
+         methods: {
+            add(){
+					console.log('add')
+					this.n++
+			},
+			bye(){
+				console.log('bye')
+				this.$destroy()
+			}
+         },
+         computed: {},
+         watch:{
+			n(){
+				console.log('n变了')
+			}
+		},
+        // 初始化，但数据代理未开始，此时无法通过vm访问data数据和methods方法
+        beforeCreate() {
+			console.log('beforeCreate')
+		},
+        // 初始化数据监测、数据代理，此时可以通过vm访问data数据和methods方法
+		created() {
+			console.log('created')
+		},
+        // 解析模板，在内存中生成虚拟DOM，此时DOM结构还没有被vue解析，无法操作DOM
+		beforeMount() {
+			console.log('beforeMount')
+		},
+        // 虚拟DOM已经转化为真实DOM，DOM结构已被vue解析，可以操作DOM(但不推荐在这里操作DOM)
+		mounted() {
+			console.log('mounted')
+		},
+        // 数据已更新，单页面未更新
+		beforeUpdate() {
+			console.log('beforeUpdate')
+		},
+        // beforeUpdate--updated   新旧虚拟DOM比较，更新页面
+        // 数据页面均已更新
+		updated() {
+			console.log('updated')
+		},
+        // 数据方法等都可用，马上要执行销毁过程
+		beforeDestroy() {
+			console.log('beforeDestroy')
+		},
+        // 销毁完毕，数据等都不可用
+		destroyed() {
+			console.log('destroyed')
+		},
+    })
+    </script>
+</body>
+</html>

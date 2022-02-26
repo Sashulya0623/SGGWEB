@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+</head>
+<body>
+    <!-- 
+        条件渲染：
+			1.v-if(不推荐同时使用 v-if 和 v-for)
+						写法：
+								(1).v-if="表达式" 
+								(2).v-else-if="表达式"
+								(3).v-else="表达式"
+						适用于：切换频率较低的场景。
+						特点：不展示的DOM元素直接被移除。
+						注意：v-if可以和:v-else-if、v-else一起使用，但要求结构不能被“打断”
+			2.v-show(默认false)
+						写法：v-show="表达式"
+						适用于：切换频率较高的场景。
+						特点：不展示的DOM元素未被移除，仅仅是使用样式隐藏掉
+				
+			3.备注：使用v-if的时，元素可能无法获取到，而使用v-show一定可以获取到
+
+            4. template模板：不影响html结构的包裹盒子
+     -->
+
+    <div id='root'>
+        <!-- v-if -->
+        <h3>当前n值为：m</h3>
+        <button @click="m++">点我加1</button>
+        <ul>
+            <li v-if="m===1">vue</li>
+            <li v-else-if="m===2">react</li>
+            <li v-else-if="m===3">angular</li>
+            <li v-else>好好</li>
+        </ul>
+
+        <!-- template模板：不影响html结构的包裹盒子 -->
+        <template>
+            <div v-if="m===1">vue</div>
+            <div v-else-if="m===2">react</div>
+            <div v-else-if="m===3">angular</div>
+            <div v-else>好好</>
+        </template>
+
+        <!-- v-show -->
+        <h3 v-show>欢迎来到{{year}}</h3>
+        <h3 v-show='false'>欢迎来到{{year}}</h3>
+        <h3 v-show='true'>欢迎来到{{year}}????</h3>
+    </div>
+
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                m: 0,
+                year: 2022
+             },
+             methods: {},
+             computed: {}
+        })
+    </script>
+</body>
+</html>

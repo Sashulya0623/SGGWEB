@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_姓名案例_插值语法实现</title>
+</head>
+<body>
+    <!-- 
+        计算属性：
+		    1.定义：要用的属性不存在，要通过已有属性计算得来。
+		    2.原理：底层借助了Objcet.defineproperty方法提供的getter和setter。
+		    3.get函数什么时候执行？
+		    			(1).初次读取时会执行一次。
+		    			(2).当依赖的数据发生改变时会被再次调用。
+		    4.优势：与methods实现相比，内部有缓存机制（复用：如果数据未发生变化使用缓存中的数据），效率更高，调试方便。
+		    5.备注：
+		    		1.计算属性最终会出现在vm上，直接读取使用即可。
+		    		2.如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变
+     -->
+    
+    <div id='root'>
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+		名：<input type="text" v-model="lastName"> <br/><br/>
+		插值语法实现 全名：<span>{{firstName}}-{{lastName}}</span>
+        <hr>
+        <!-- 注意在插值语法模板的标签中使用methods方法要加(),否则会把方法名当成变量解析 -->
+        methods方法实现 全名：<span>{{getFullName()}}</span>
+        <hr>
+        计算属性实现 全名：<span>{{fullName1}}</span>
+    </div>
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                firstName: '张',
+                lastName: '三',
+                fullName: '张三'
+             },
+             methods: {
+                getFullName() {
+                    return this.firstName + "-" + this.lastName
+                }
+             },
+             computed: {
+                 fullName1: {
+                    // get有什么作用？当有人读取fullName1时，get就会被调用，且返回值就作为fullName1的值
+					// get什么时候调用？1.初次读取fullName1时。2.所依赖的数据发生变化时。
+                    get() {
+                        // console.log(this) //此处的this是vm
+                        return this.firstName + '-' + this.lastName
+                    },
+
+                    // set什么时候调用? 当fullName1被修改时
+                    set(value) {
+                        const arr = value.split('-')
+						this.firstName = arr[0]
+						this.lastName = arr[1] 
+                    }
+                 }
+             }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+/*main*/
+/* ul外不用在包一个div */
+/* 没有项目列表时显示的是一条横线 */
+.todo-main {
+    margin-left: 0px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 0px;
+}

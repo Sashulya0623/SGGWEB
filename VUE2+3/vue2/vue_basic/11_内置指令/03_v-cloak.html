@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        v-cloak指令（没有值）：
+				1.本质是一个特殊属性，Vue实例创建完毕并接管容器后，会删掉v-cloak属性。
+				2.使用css配合v-cloak可以解决网速慢时页面展示出{{xxx}}的问题。
+     -->
+     <div id='root'>
+        <!-- 2.  可以让页面中的标签绑定v-cloak，结合css在vue加载前隐藏
+            结合Vue实例创建完毕并接管容器后，会删掉v-cloak属性在显示标签
+        -->
+        <h2 v-cloak>{{msg}}</h2>
+     </div>
+
+     <!-- 1. 现在让请求vue.js的资源慢5s再响应，这是插值模板由于vue还没加载到，就不能解析数据造成页面乱码 -->
+     <!-- 
+         老师的延时写法报错，我直接调慢了网络
+        <script type="text/javascript" src="http://localhost:8080/resource/5s/vue.js"></script> -->
+     <script src='../js/vue.js'></script>
+     <script>
+        Vue.config.productionTip = false
+        
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                 msg: '渲染成功'
+             },
+             methods: {},
+             computed: {}
+        })
+     </script>
+</body>
+</html>

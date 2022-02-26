@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生创建输入框</title>
+    <style>
+        .tomato {
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        点击按钮创建一个input输入框，有背景色，有默认值
+     -->
+     <button id="btn" @click="creatEle">点我创建一个输入框</button>
+
+     <script>
+        const btn = document.getElementById('btn')
+
+        btn.onclick = function() {
+            // 创建元素
+            let input = document.createElement('input')
+
+            // 添加样式、值
+            input.className = 'tomato'
+            input.value= 99
+            input.onclick = ()=> {
+                alert('999')
+            }
+
+            // 添加元素
+            document.body.appendChild(input)
+
+            // 输入框要聚焦
+            input.focus()
+
+            // 输入被创建元素的父元素
+            console.log(input.parentElement)
+        }
+
+     </script>
+</body>
+</html>

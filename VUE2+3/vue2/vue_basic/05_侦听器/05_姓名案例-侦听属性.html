@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05_姓名案例-侦听属性</title>
+</head>
+<body>
+    <div id='root'>
+        姓：<input type="text" v-model="firstName"> <br/><br/>
+		名：<input type="text" v-model="lastName"> <br/><br/>
+        侦听属性实现 全名：<span>{{fullName}}</span>
+    </div>
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                firstName: '张',
+                lastName: '三',
+                fullName:'张-三'
+             },
+             watch: {
+                 firstName(value) {
+                    setTimeout(()=>{
+						console.log(this)
+						this.fullName = value + '-' + this.lastName
+					},1000)
+                 },
+
+                 lastName(value) {
+                    this.fullName = this.firstName + "-" + value
+                 }
+             }
+        })
+    </script>
+</body>
+</html>

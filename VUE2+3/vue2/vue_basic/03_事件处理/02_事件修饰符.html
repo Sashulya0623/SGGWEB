@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .list {
+			width: 200px;
+			height: 200px;
+			background-color: peru;
+			overflow: auto;
+		}
+        li {
+		  height: 100px;
+		}
+		
+    </style>
+</head>
+<body>
+    <!-- 
+	Vue中的事件修饰符： @事件名.修饰符
+		1.prevent：阻止默认事件（常用）；
+		2.stop：阻止事件冒泡（常用）；
+		3.once：事件只触发一次（常用）；
+		4.capture：使用事件的捕获模式,在事件的捕获阶段触发事件而不是冒泡阶段
+		5.self：只有event.target是当前操作的元素时才触发事件；
+		6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+	-->
+    <div id='root'>
+        <!-- 阻止默认事件： 阻止链接的默认跳转 -->
+        <a :href="url" @click.prevent="show">百度一下</a>
+
+        <!-- 阻止事件冒泡 -->
+        <div @click="btn2()">
+            <span @click.stop="btn1($event)">点击</span>
+            <!-- 修饰符可以连续写 -->
+			<a href="http://www.atguigu.com" @click.prevent.stop="btn1($event)">点我提示信息</a>
+        </div>
+
+        <!-- 事件只触发一次：第一次 -->
+			<button @click.once="btn1($event)">点我提示信息</button>
+
+        <!-- 使用事件的捕获模式,在事件的捕获阶段触发事件而不是冒泡阶段 -->
+        <!-- 原本，点击li，先输出2在冒泡输出1,给ul加capture,点击li先输出在输出2 -->
+        <ul @click.capture="showMsg(1)">
+            点击ul
+            <li @click="showMsg(2)">点击li</li>
+        </ul>
+
+        <!-- 只有event.target是当前操作的元素时才触发事件； -->
+        <!-- 点击li，原本由于事件冒泡，ul的点击事件也会触发，但是给ul的事件绑定事件修饰符self，则不会被触发 -->
+        <ul @click.self="show">
+            点击ul
+            <li @click="show">点击li</li>
+        </ul>
+
+        <!-- 事件的默认行为立即执行，无需等待事件回调执行完毕； -->
+        <!-- 鼠标滚动事件的默认行为是页面发生滚动，正常情况下要等遍历结束页面才会滚动，加了passive会立刻滚动不需要等待回调函数执行完毕 -->
+        <ul @wheel.passive="getTTT"　class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <script src='../js/vue.js'></script>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+             el:'#root',
+             data: {
+                url: 'https://www.baidu.com/?tn=21002492_28_hao_pg'
+             },
+             methods: {
+                 show(e) {
+                    console.log(e.target)
+                 },
+                 btn1(e) {
+                    alert("我是span")
+                 },
+                 btn2(e) {
+                    alert("我是div")
+                 },
+                 showMsg(msg){
+					console.log(msg)
+				},
+                getTTT() {
+                    for(let i = 0; i < 10000; i++) {
+                        console.log("#");
+                    }
+                    console.log("累坏了");
+                }
+
+             }
+        })
+    </script>
+</body>
+</html>

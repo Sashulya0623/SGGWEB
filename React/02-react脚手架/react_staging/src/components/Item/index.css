@@ -1,0 +1,38 @@
+/*item*/
+/* li设置高不设置宽,ul和li都没有设置宽,ul的宽是header中的input撑起来的宽度 
+    li的宽度是ul内部的空间占满的宽度
+*/
+li {
+    list-style: none;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+li label {
+    float: left;
+    cursor: pointer;
+}
+
+li label, li label input {
+    /*vertical-align:设置元素的垂直对齐方式 , middle把此元素放置在父元素的中部*/
+    vertical-align: middle;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
+}
+
+li button {
+    float: right;
+    display: none;
+    margin-top: 3px;
+}
+  
+li:before {
+    content: initial;
+}
+  
+li:last-child {
+    border-bottom: none;
+}

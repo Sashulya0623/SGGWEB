@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	git
+	* 配置提交人姓名：git config --global user.name 提交人姓名
+	* git config --global user.name Vincy-hhr
+	* 配置提交人邮箱：git config --global user.email 提交人邮箱
+	* git config --global user.email vincyhhr@qq.com
+	
+	github账号1
+	yan191..
+	tara...520
+	
+	github账号2
+	vin...@qq.com
+	tara....520
+
+git bash命令行
+* 输入命令 ls ~/.ssh/，看到 id_rsa 与 id_rsa_pub 则说明已经有一对密钥
+* 我的的确有但是不是第一个github的，而是gitee的
+	id_rsa  id_rsa.pub  known_hosts  known_hosts.old
+* 生成新的公钥，并命名为 id_rsa_work，id_rsa_own (保证与之前密钥文件名称不同即可)
+	work是公用
+	own私用
+	ssh-keygen -t rsa -f ~/.ssh/id_rsa_work -C "yan1911881209@163.com"
+	ssh-keygen -t rsa -f ~/.ssh/id_rsa_own -C "yan1911881209@163.com"
+	没有密码
+* 在 .ssh 文件夹下新建 config 文件并编辑为以下内容，其中name.github.com的name为你的github用户名
+# default                                                                    
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_own
+# work                                                                           
+Host avtrusova0623.github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_work
+* 将生成的 id_rsa.pub，id_rsa_work.pub内容copy 到你对应的github账号设置中
+	直接把两个文件中的内容分别复制到两个github的ssh中
+* 测试 ssh 链接
+ssh -T git@avtrusova0623.github.com
+ssh -T git@github.com
+# Hi avtrusova0623! You've successfully authenticated, but GitHub does not provide shell access.
+# 出现上边这句，表示链接成功
+
+# 注意
+
+* 取消git全局配置(从这里开始有疑问，最后我又配置了全局git config --global user.name "Vincy-hhr"
+git config --global user.email "vincyhhr@qq.com")
+
+git config --global --unset user.name
+git config --global --unset user.email
+
+* 进入项目文件夹单独配置
+# 单独设置每个repo 用户名/邮箱
+git config user.email “xxxx@xx.com”
+git config user.name “xxxx”
+
+
+运行旧项目(SGGWEB)用的是第一个github账号
+提交git时重新设置了局部邮箱用户名
+git config user.email "yan1911881209@163.com"
+git config user.name "vincy-hhr-own"
+
+* 然后git remote rm origin //清空原有的连接
+重新连接ssh连接:
+git remote add origin git@github.com:Vincy-hhr/SGGWEB.git
+git push -u origin master
+成功连接上并可以更新新仓库
+
+* 第二个github账号使用
+创建本地test仓库连接远程test：要带上用户名
+设置用户名和邮箱
+git config --global user.name "Vincy-hhr"
+git config --global user.email "vincyhhr@qq.com"
+
+第二个账号要加上用户名
+git remote add origin git@avtrusova0623.github.com:avtrusova0623/test.git
+git push -u origin main
+成功连接上并可以更新新仓库
+
+#还没测试的
+clone 到本地
+
+原来： git clone git@github.com: 用户名/learngit.git
+
+现在：
+ git clone git@one.github.com: one的用户名/learngit.git
+ git clone git@two.github.com: two的用户名/learngit.git
+
+
+
+
+
+
+</body>
+</html>

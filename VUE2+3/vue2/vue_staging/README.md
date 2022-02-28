@@ -216,55 +216,7 @@ Vue.use(plugins,1,2,3)
 ## 七、todolist案例
 ### 1. 编写静态页面，分成各组件
 ### 2. 初始化列表
-1. 在App初始化列表数据，再把数据传给List---->Item显示在页面上
-```js
-// App.vue
-<List :todos="this.todos" />
-// 任务名数组:包含的是任务对象，任务编号，任务名，任务完成状态
-todos: [
-    {id: '001', tname: '写作业', done: false},
-    {id: '002', tname: '跑步', done: true},
-    {id: '003', tname: '看电影', done: false},
-]
-
-// Item.vue
-<li>
-    <input type="checkbox" name="" id="todo.id" :checked="todo.done">
-    <label for="ip1">{{todo.tname}}</label>
-    <button style="display: none">删除</button>
-</li>
-props: {
-    todo: {
-        type: Object,
-        required: true,
-    }
-}
-```
-### 3. 添加任务
-1. 子组件向父组件传递数据
-- 首先先在父组件定义一个方法，把该方法传递给子组件
-- 子组件调用该方法传递数据给父组件
-```js
-// App.vue
-<Header  :addTodo="addTodo" />
-//添加一个todo
-addTodo(todoObj){
-    	this.todos.unshift(todoObj)
-}
-// Header.vue
-// 接收从App传递过来的addTodo
-<input type="text" v-model="title" @keyup.enter="add" placeholder="请输入你的任务名称，按回车确定">
-props:['addTodo'],
-methods: {
-   add(){
-   	   // 校验数据
-   	   if(!this.title.trim()) return alert('输入不能为空')
-   	   // 将用户的输入包装成一个todo对象
-   	   const todoObj = {id:nanoid(),title:this.title,done:false}
-   	   // 通知App组件去添加一个todo对象
-   	   this.addTodo(todoObj)
-   	   // 清空输入
-   	   this.title = ''
-   } 
-}
-```
+### 3. 添加任务，删除任务，清除已完成任务
+* 都应用了父子组件通过props传递消息
+* 先在父组件App定义方法，子组件调用该方法向父组件传递数据
+* 复选框v-model绑定的是选中状态true or false

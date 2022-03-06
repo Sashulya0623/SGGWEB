@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>localStorage</h2>
+    <button onclick="saveData()">保存数据</button>
+    <button onclick="getData()">获取数据</button>
+    <button onclick="deleData()">删除数据</button>
+    <button onclick="clearData()">清空数据</button>
+
+    <script>
+        let p = {
+            name: 'sova',
+            sex: 'female',
+            age: 17
+        }
+
+        function saveData() {
+            localStorage.setItem('uname', 'avtrusova')
+            localStorage.setItem('msg', 666) // 666会被转为字符串
+            localStorage.setItem('person', JSON.stringify(p))
+        }
+        function getData() {
+            console.log(localStorage.getItem('uname'));
+            console.log(localStorage.getItem('msg'));
+            console.log(localStorage.getItem('person'));           
+        }
+        function deleData() {
+            localStorage.removeItem('uname')
+            localStorage.removeItem('msg') 
+            localStorage.removeItem('person')
+        }
+        function clearData() {
+            localStorage.clear()
+        }
+    </script>
+</body>
+</html>

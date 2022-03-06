@@ -1,0 +1,38 @@
+npm config set prefix "D:\nodejs\node_global"  配置全局安装路径
+npm config set cache "D:\nodejs\node_cache"  配置缓存的路径
+
+* 创建用户变量npm_home: D:\nodeJs
+* 用户变量path：%npm_home%
+
+重新安装cnpm：npm install -g cnpm --registry=https://registry.npm.taobao.org
+* 在系统变量中填写cnpm路径： D:\nodeJs\node_global\
+* 从新打开命令行 cnpm -v
+
+本地安装webpack  webpack-cli
+	将本地项目文件夹npm init初始化
+                npm i webpack@4.44.2 webpack-cli@3.3.12 -D
+                本地安装查看版本号npx webpack -v
+                * 注意同时安装webpack和webpack-cli，不要分两次安装
+
+安装vue-cli
+                npm install -g @vue/cli@4.5.13   cli4
+	vue create test
+
+                npm install @vue/cli-init -g     cli2
+
+                运行vue ui 成功
+
+以管理员身份运行vscode
+
+VSCode报错：vue : 无法加载文件 D:\nodejs\node_global\vue.ps1，因为在此系统上禁止运行脚本
+
+解决方法：
+（1）以管理员身份运行VSCode
+
+（2）执行命令：get-ExecutionPolicy（取得shell的当前执行策略）
+
+显示Restricted（表示状态是禁止的）
+
+（3）执行命令：set-ExecutionPolicy RemoteSigned
+
+（4）执行命令：get-ExecutionPolicy，显示RemoteSigned

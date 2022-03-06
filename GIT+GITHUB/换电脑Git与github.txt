@@ -1,0 +1,46 @@
+
+右键git bash
+1. 生成ssh公钥
+ssh-keygen -t rsa -f ~/.ssh/id_rsa_h -C "vincyhhr@qq.com"
+id_rsa_h
+id_rsa_h.pub
+
+2. 在 .ssh 文件夹下新建 config 文件并编辑为以下内容，其中name.github.com的name为你的github用户名
+# default                                                                    
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa_h
+
+3. * 将生成的 id_rsa_h.pub内容copy 到对应的github账号设置中
+
+4. 测试 ssh 链接
+ssh -T git@github.com 
+出现以下消息：
+$ ssh -T git@github.com
+The authenticity of host 'github.com (20.205.243.166)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Hi avtrusova0623! You've successfully authenticated, but GitHub does not provide shell access.
+
+中间输入一次yes，注意yes不是y
+出现下面这句
+
+# Hi avtrusova0623! You've successfully authenticated, but GitHub does not provide shell access.
+# 出现上边这句，表示链接成功
+
+5. 配置用户名和邮箱
+git config --global user.name "vincy-hhr"
+git config --global user.email vincyhhr@qq.com
+
+6. 新建本地项目git初始化
+推送： 先转到main分支
+使用ssh链接链接： git remote add origin git@github.com:avtrusova0623/testtwo.git
+git push -u origin main
+
+注： git remote rm origin清空原有连接
+
+
+

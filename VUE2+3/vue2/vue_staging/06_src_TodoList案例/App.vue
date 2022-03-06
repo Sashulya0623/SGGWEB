@@ -4,7 +4,7 @@
       <div class="todo_wrapper">
         <Header :addTodo='addTodo'/>
         <List :todos='todos' :checkTodo='checkTodo' :deleteTodo='deleteTodo'/>
-        <Footer :todos='todos' :checkAllTodo='checkAllTodo' :clearAllDone='clearAllDone' />
+        <Footer :todos='todos' :checkAllTodo='checkAllTodo'  :clearAllDone='clearAllDone'/>
       </div>
       
     </div>
@@ -64,10 +64,10 @@ export default {
       })
     },
 
-    // 清除已完成任务
+    // 删除所有已完成任务
     clearAllDone() {
       this.todos = this.todos.filter((todoObj) => {
-        return todoObj.done !== true 
+        return todoObj.done !== true
       })
     }
     
@@ -98,6 +98,7 @@ export default {
     border-style: none;
     outline: none;
     border-radius: 3px;
+  
     position: absolute;
     top: 5px;
     right: 5px;

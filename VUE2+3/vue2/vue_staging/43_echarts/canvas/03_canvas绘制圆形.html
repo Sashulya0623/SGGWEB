@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            border: 2px #bfa solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400"></canvas>
+
+    <script>
+        const canvas = document.querySelector("canvas")
+        // 画笔
+        const context = canvas.getContext("2d")
+
+        // 绘制圆形
+        context.beginPath()
+        // 绘制方法arc及参数：圆心x轴，圆心y轴，圆半径，起始弧度，结束的弧度，是否逆时针绘制
+        // 360° = 2 * Math.PI
+        context.arc(200,200,100,0,2 * Math.PI,true)
+        // 填充颜色
+        context.fillStyle = "#bfa"
+        context.fill()
+        // 设置线段颜色
+        context.strokeStyle = 'purple'
+        // 绘制圆形
+        context.stroke()
+
+        // 在绘制一个圆
+        context.beginPath()
+        context.arc(50,100,50,0,2,false)
+        context.stroke()
+
+    </script>
+
+</body>
+</html>

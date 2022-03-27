@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            border: 2px #000 solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="420"></canvas>
+
+    <script>
+        const canvas = document.querySelector("canvas")
+
+        // 画笔
+        const context = canvas.getContext("2d")
+
+        // 标题文字
+        context.font = "20px 微软雅黑"
+        context.fillText("数据可视化",50,70)
+
+        // 画坐标轴
+        context.moveTo(120, 100)
+        context.lineTo(120, 350)
+        context.lineTo(660, 350)
+        context.fillText("150", 80,160)
+        context.stroke()
+        
+
+        // 画横线
+        context.moveTo(120,310)
+        context.lineTo(660,310)
+        context.fillText("120", 80,200)
+
+        context.moveTo(120,270)
+        context.lineTo(660,270)
+        context.fillText("90", 90,240)
+
+        context.moveTo(120,230)
+        context.lineTo(660,230)
+        context.fillText("60", 90,280)
+
+        context.moveTo(120,190)
+        context.lineTo(660,190)
+        context.fillText("30", 90,320)
+        
+        
+
+        context.moveTo(120,150)
+        context.lineTo(660,150)
+        context.fillText("0", 90,380)
+        context.stroke()
+        
+
+        // 底部短线
+        context.moveTo(240,350)
+        context.lineTo(240,360)
+        context.fillText("食品", 160,380)
+
+        context.moveTo(360,350)
+        context.lineTo(360,360)
+        context.fillText("数码", 280,380)
+
+        context.moveTo(480,350)
+        context.lineTo(480,360)
+        context.fillText("服饰", 400,380)
+
+        context.moveTo(600,350)
+        context.lineTo(600,360)
+        context.fillText("精装", 520,380)
+        context.stroke()
+        
+
+        // 画柱状图
+        context.fillStyle = "skyblue"
+        // context.fill()
+        // 若添加上面一句，会导致所以文字变色且填充的乱七八糟
+        context.fillRect(130,220,100,130)
+        context.fillRect(250,190,100,160)
+        context.fillRect(370,230,100,120)
+        context.fillRect(490,150,100,200)
+        
+
+    </script>
+</body>
+</html>

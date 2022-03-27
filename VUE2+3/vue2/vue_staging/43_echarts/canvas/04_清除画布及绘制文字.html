@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            border: 2px #bfa solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400"></canvas>
+
+    <script>
+        const canvas = document.querySelector("canvas")
+
+        // 画笔
+        const context = canvas.getContext("2d")
+
+        // 绘制矩形
+        context.fillRect(300,200,100,180)
+
+        // 清除整个画布 ： 画布起点几宽高
+        // context.clearRect(0,0,500,400)
+
+        // 清除部分
+        context.clearRect(300,250,50,90)
+
+
+        // 设置文字大小
+        context.font = "28px 微软雅黑"
+        // 设置文字颜色
+        context.fillStyle = "purple"
+        // 绘制文字: 内容，坐标
+        context.fillText("亚历珊德拉", 50,50)
+    </script>
+</body>
+</html>

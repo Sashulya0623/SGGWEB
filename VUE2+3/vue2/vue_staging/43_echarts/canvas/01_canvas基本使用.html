@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            border: 1px #bfa solid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1. canvas画布是html5新增特性，双闭合标签
+        2. 该标签默认宽高300*150
+        3. 浏览器默认该标签是一张图片
+        4. 给该标签添加文本内容和子节点没有任何意义
+        5. 操作该标签做任何事都需要通过js完成
+        6. 该标签的宽高通过canvas标签属性width、height设置不通过样式style设置
+        7. 该标签以左上角为原点，向右x，向下y轴
+     -->
+     <canvas width="500" height="400" id="canvas"></canvas>
+
+     <script>
+        //  获取canvas标签
+        const canvas = document.getElementById("canvas")
+        // 获取画布中的笔:是一个对象
+        const context = canvas.getContext('2d')
+        // 绘制线段
+        // 1. 设置线段的起点:起点只有一个
+        context.moveTo(100,100)
+        // 2. 绘制其他点：其他点可以有多个
+        context.lineTo(100,300)
+        context.lineTo(300,100)
+        // 设置起点和最终的结束点连在一起
+        context.closePath()
+
+        // 设置图形的背景填充颜色
+        context.fillStyle = "#bfa"
+        // 填充颜色
+        context.fill()
+
+        // 设置图形线段的颜色与宽度
+        context.strokeStyle = "tomato"
+        context.lineWidth = "20"
+
+        // 3. stroke方法绘制线段
+        context.stroke()
+     </script>
+</body>
+</html>

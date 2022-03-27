@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 800px;
+            height: 500px;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1. svg基于xml的图像格式文件，矢量图，放大不会失真，兼容差不支持ie8以下
+        2. svg双闭合标签，默认宽高300*150，务必在标签内部绘制图形，可在style中设置宽高
+     -->
+
+     <svg class="box">
+        <!-- 绘制直线： stroke显示线段, x1,y1,x2,y2是两个点的坐标，两点连成线-->
+        <line x1="100" y1="100" x2="150" y2="350" stroke="red"></line>
+        <!-- 绘制折线： 多个点坐标，每个点之间有逗号分隔
+            默认填充黑色，fill-opacity去掉填充颜色但同时看不见折线
+            stroke线的颜色
+        -->
+        <polyline points="200 100,255 340,400 199" fill-opacity="0" stroke="purple"></polyline>
+        <!-- 绘制矩形：xy起点坐标，wh宽高，fill设置填充颜色 -->
+        <rect x="400" y="390" width="20" height="50" fill="skyblue"></rect>
+        <!-- 绘制圆形： cx,cy圆心坐标，r半径,默认填充黑色-->
+        <circle cx="600" cy="250" r="50" style="stroke:cyan; fill: none"></circle>
+        <!-- 绘制圆、椭圆 : cx,cy圆心坐标,rx水平半径，ry垂直半径，相等为圆不等为椭圆，默认填充黑色-->
+        <ellipse cx="600" cy="390" rx="100" ry="50"></ellipse>
+        <!-- 绘制多边形 : 多点相连，默认填充黑色-->
+        <polygon points="600 50, 690 100, 300 430, 400 35" style="fill: none; stroke: red"></polygon>
+        <!-- 绘制任意图形 
+            M移动到初始位置
+            L画线
+            Z 将结束和开始点闭合
+        -->
+        <path fill-opacity="0" stroke="blue" d="
+            M 10 10
+            L 20 400
+            L 30 120
+            L 40 66
+            L 50 99
+            L 60 120
+            L 70 99
+            Z
+            "
+        ></path>
+     </svg>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            border: 2px #bfa solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400"></canvas>
+
+    <script>
+        const canvas = document.querySelector("canvas")
+        //  先获取画笔
+        const context = canvas.getContext('2d')
+
+        // 绘制矩形方式一：只能描边不能填充颜色
+        // 参数： x轴距离，y轴距离，图形宽度，图形高度
+        context.strokeRect(200,200,50,100)
+
+        // 绘制方式方式二：可填充颜色,默认颜色为黑色
+        // 设置填充颜色，在绘制图形之前
+        context.fillStyle = "skyblue"
+        context.fill()
+        context.fillRect(400,200,50,100)
+    </script>
+</body>
+</html>

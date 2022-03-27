@@ -1,22 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
-import less from 'less'
-// 引入store
-// import store from './store'
-
-import VueRouter from 'vue-router'
-import router from './router/index'
- 
-Vue.use(less)
-
-Vue.use(VueRouter)
-
 
 Vue.config.productionTip = false
 
+// 引入ElementUI组件库
+import ElementUI from 'element-ui';
+// 引入ElementUI全部样式
+import 'element-ui/lib/theme-chalk/index.css';
+
+// 应用ElementUI
+Vue.use(ElementUI);
+
 new Vue({
   render: h => h(App),
-  // store
-  router
-  
 }).$mount('#app')
